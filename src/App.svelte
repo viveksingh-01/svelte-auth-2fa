@@ -1,7 +1,11 @@
 <script>
+  import Navbar from './components/Navbar.svelte';
   import Signup from './pages/Signup.svelte';
 </script>
 
-<main>
+<header>
+  <Navbar />
+</header>
+<main class="container">
   <Signup />
 </main>
