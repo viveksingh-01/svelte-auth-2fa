@@ -1,5 +1,5 @@
 <section class="form__container">
-  <h2 class="mb-4 is-size-3">Login</h2>
+  <h2 class="mb-4 is-size-2">Login</h2>
   <div class="content">
     <div class="field">
       <label class="label" for="email">Email</label>
@@ -21,9 +21,9 @@
         />
       </div>
     </div>
-    <div class="field is-grouped mt-5">
+    <div class="field mt-5">
       <div class="control">
-        <button class="button is-primary is-outlined"> Login </button>
+        <button class="button is-info is-fullwidth"> Login </button>
       </div>
     </div>
   </div>

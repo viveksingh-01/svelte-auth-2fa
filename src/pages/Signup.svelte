@@ -39,7 +39,7 @@
     </div>
     <div class="field mt-5">
       <div class="control">
-        <button class="button is-info is-fullwidth"> Submit </button>
+        <button class="button is-primary is-fullwidth"> Submit </button>
       </div>
     </div>
   </div>
