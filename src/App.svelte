@@ -1,7 +1,7 @@
 <script>
-  import Login from './pages/Login.svelte';
+  import Signup from './pages/Signup.svelte';
 </script>
 
 <main>
-  <Login />
+  <Signup />
 </main>
