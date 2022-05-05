@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { link } from 'svelte-spa-router';
+
   let isActive = false;
   function toggleNavbar() {
     isActive = !isActive;
@@ -28,15 +30,15 @@
     </div>
     <div id="navbar" class="navbar-menu {isActive && 'is-active'}">
       <div class="navbar-start">
-        <a class="navbar-item" href="/"> Home </a>
+        <a href="/" use:link class="navbar-item"> Home </a>
       </div>
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-primary" href="/signup">
+            <a href="/signup" use:link class="button is-primary">
               <strong>Sign up</strong>
             </a>
-            <a class="button is-light" href="/login"> Log in </a>
+            <a href="/login" use:link class="button is-light"> Log in </a>
           </div>
         </div>
       </div>
