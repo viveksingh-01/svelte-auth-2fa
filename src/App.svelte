@@ -1,3 +1,7 @@
-<div>
-  <h2>Hello World!</h2>
-</div>
+<script>
+  import Login from './pages/Login.svelte';
+</script>
+
+<main>
+  <Login />
+</main>
