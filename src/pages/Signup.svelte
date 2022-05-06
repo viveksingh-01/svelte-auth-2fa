@@ -1,10 +1,22 @@
 <section class="form__container">
   <h2 class="mb-4 is-size-2">Sign-up</h2>
   <div class="content">
-    <div class="field">
-      <label class="label" for="name">Name</label>
-      <div class="control">
-        <input type="text" placeholder="Enter your name" class="input" />
+    <div class="is-flex">
+      <div class="field mr-2">
+        <label class="label" for="firstname">First Name</label>
+        <div class="control">
+          <input
+            type="text"
+            placeholder="Enter your first name"
+            class="input"
+          />
+        </div>
+      </div>
+      <div class="field">
+        <label class="label" for="lastname">Last Name</label>
+        <div class="control">
+          <input type="text" placeholder="Enter your last name" class="input" />
+        </div>
       </div>
     </div>
     <div class="field">
