@@ -5,6 +5,10 @@
     email = '',
     password = '',
     confirmPassword = '';
+  let response: {
+    message: string;
+    type: 'success' | 'error';
+  };
 
   interface ISignupPayload {
     firstName: string;
@@ -15,14 +19,20 @@
   }
 
   async function saveFormData(payload: ISignupPayload) {
+    isLoading = true;
+    response = { message: '', type: null };
     try {
       const { data } = await axios.post(
         'http://localhost:8000/api/register',
         payload
       );
-      console.log('res', data?.message);
+      isLoading = false;
+      response.message = data?.message;
+      response.type = 'success';
     } catch (error) {
-      console.error('error', error?.response?.data.message);
+      isLoading = false;
+      response.message = error?.response?.data.message;
+      response.type = 'error';
     }
   }
 
@@ -40,6 +50,13 @@
 
 <section class="form__container">
   <h2 class="mb-4 is-size-2">Sign-up</h2>
+  {#if response?.message}
+    <article
+      class="message {response.type === 'success' ? 'is-primary' : 'is-danger'}"
+    >
+      <div class="message-body">{response.message}</div>
+    </article>
+  {/if}
   <form on:submit|preventDefault={submitForm}>
     <div class="content">
       <div class="is-flex">
@@ -70,7 +87,7 @@
         <label class="label" for="email">Email</label>
         <div class="control">
           <input
-            type="text"
+            type="email"
             placeholder="Enter your email address"
             class="input"
             bind:value={email}
