@@ -1,7 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import { authenticated } from '../store/auth';
+  import { isAuthenticated } from '../store/auth';
 
   interface IUser {
     id: number;
@@ -15,7 +15,7 @@
     try {
       const { data } = (await axios.get('user')) as { data: IUser };
       user = data;
-      authenticated.set(true);
+      isAuthenticated.set(true);
     } catch (error) {
       console.log(error);
     }
