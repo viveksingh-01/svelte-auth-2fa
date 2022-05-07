@@ -9,6 +9,7 @@
     message: string;
     type: 'success' | 'error';
   };
+  let isLoading = false;
 
   interface ISignupPayload {
     firstName: string;
@@ -99,7 +100,7 @@
         <div class="control">
           <input
             type="password"
-            placeholder="Enter your password"
+            placeholder="Enter password"
             class="input"
             bind:value={password}
           />
@@ -110,7 +111,7 @@
         <div class="control">
           <input
             type="password"
-            placeholder="Re-enter your password"
+            placeholder="Re-enter password"
             class="input"
             bind:value={confirmPassword}
           />
@@ -118,7 +119,10 @@
       </div>
       <div class="field mt-5">
         <div class="control">
-          <button type="submit" class="button is-primary is-fullwidth">
+          <button
+            type="submit"
+            class="button is-primary is-fullwidth {isLoading && 'is-loading'}"
+          >
             Submit
           </button>
         </div>
