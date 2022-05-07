@@ -1,5 +1,6 @@
 <script lang="ts">
   import axios from 'axios';
+  import { push } from 'svelte-spa-router';
 
   interface ILoginPayload {
     email: string;
@@ -31,6 +32,10 @@
       isLoading = false;
       response.message = message;
       response.type = 'success';
+
+      setTimeout(async () => {
+        await push('/');
+      }, 1000);
     } catch (error: any) {
       isLoading = false;
       response.message = error?.response?.data.message;
