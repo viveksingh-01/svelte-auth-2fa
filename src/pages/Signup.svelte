@@ -1,15 +1,5 @@
 <script lang="ts">
   import axios from 'axios';
-  let firstName = '',
-    lastName = '',
-    email = '',
-    password = '',
-    confirmPassword = '';
-  let response: {
-    message: string;
-    type: 'success' | 'error';
-  };
-  let isLoading = false;
 
   interface ISignupPayload {
     firstName: string;
@@ -19,7 +9,20 @@
     confirmPassword: string;
   }
 
-  async function saveFormData(payload: ISignupPayload) {
+  let firstName = '',
+    lastName = '',
+    email = '',
+    password = '',
+    confirmPassword = '';
+
+  let response: {
+    message: string;
+    type: 'success' | 'error';
+  };
+
+  let isLoading = false;
+
+  async function submitData(payload: ISignupPayload) {
     isLoading = true;
     response = { message: '', type: null };
     try {
@@ -37,7 +40,7 @@
     }
   }
 
-  function submitForm() {
+  function signup() {
     const payload: ISignupPayload = {
       firstName,
       lastName,
@@ -45,7 +48,7 @@
       password,
       confirmPassword,
     };
-    saveFormData(payload);
+    submitData(payload);
   }
 </script>
 
@@ -58,7 +61,7 @@
       <div class="message-body">{response.message}</div>
     </article>
   {/if}
-  <form on:submit|preventDefault={submitForm}>
+  <form on:submit|preventDefault={signup}>
     <div class="content">
       <div class="is-flex">
         <div class="field mr-2">
