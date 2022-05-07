@@ -1,4 +1,5 @@
 <script lang="ts">
+  import axios from 'axios';
   let firstName = '',
     lastName = '',
     email = '',
@@ -13,6 +14,18 @@
     confirmPassword: string;
   }
 
+  async function saveFormData(payload: ISignupPayload) {
+    try {
+      const { data } = await axios.post(
+        'http://localhost:8000/api/register',
+        payload
+      );
+      console.log('res', data?.message);
+    } catch (error) {
+      console.error('error', error?.response?.data.message);
+    }
+  }
+
   function submitForm() {
     const payload: ISignupPayload = {
       firstName,
@@ -21,7 +34,7 @@
       password,
       confirmPassword,
     };
-    console.log(payload);
+    saveFormData(payload);
   }
 </script>
 
