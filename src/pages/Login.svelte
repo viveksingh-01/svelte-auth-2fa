@@ -23,7 +23,7 @@
     try {
       const {
         data: { message, token },
-      } = (await axios.post('http://localhost:8000/api/login', payload, {
+      } = (await axios.post('login', payload, {
         withCredentials: true,
       })) as { data: { message: string; token: string } };
 

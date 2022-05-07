@@ -26,10 +26,7 @@
     isLoading = true;
     response = { message: '', type: null };
     try {
-      const { data } = await axios.post(
-        'http://localhost:8000/api/register',
-        payload
-      );
+      const { data } = await axios.post('register', payload);
       isLoading = false;
       response.message = data?.message;
       response.type = 'success';

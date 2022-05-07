@@ -12,9 +12,7 @@
 
   async function getUserInfo() {
     try {
-      const { data } = (await axios.get('http://localhost:8000/api/user')) as {
-        data: IUser;
-      };
+      const { data } = (await axios.get('user')) as { data: IUser };
       user = data;
     } catch (error) {
       console.log(error);
