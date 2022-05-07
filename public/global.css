@@ -1,5 +1,9 @@
 .form__container {
-  margin: 2rem auto 1rem;
+  margin: 1rem auto;
   padding: 2rem;
   max-width: 450px;
+}
+
+.label {
+  font-weight: 500;
 }
