@@ -1,34 +1,55 @@
 <script lang="ts">
   import axios from 'axios';
-  let email = '',
-    password = '';
 
   interface ILoginPayload {
     email: string;
     password: string;
   }
 
-  async function login(payload: ILoginPayload) {
+  let email = '',
+    password = '';
+
+  let response: {
+    message: string;
+    type: 'success' | 'error';
+  };
+
+  let isLoading = false;
+
+  async function submitData(payload: ILoginPayload) {
+    isLoading = true;
+    response = { message: '', type: null };
     try {
       const { data } = await axios.post(
         'http://localhost:8000/api/login',
         payload
       );
-      console.log(data?.message);
+      isLoading = false;
+      response.message = data?.message;
+      response.type = 'success';
     } catch (error) {
-      console.error(error?.response?.data.message);
+      isLoading = false;
+      response.message = error?.response?.data.message;
+      response.type = 'error';
     }
   }
 
-  function submitForm() {
+  function login() {
     const payload: ILoginPayload = { email, password };
-    login(payload);
+    submitData(payload);
   }
 </script>
 
 <section class="form__container">
   <h2 class="mb-4 is-size-2">Login</h2>
-  <form on:submit|preventDefault={submitForm}>
+  {#if response?.message}
+    <article
+      class="message {response.type === 'success' ? 'is-primary' : 'is-danger'}"
+    >
+      <div class="message-body">{response.message}</div>
+    </article>
+  {/if}
+  <form on:submit|preventDefault={login}>
     <div class="content">
       <div class="field">
         <label class="label" for="email">Email</label>
@@ -54,7 +75,10 @@
       </div>
       <div class="field mt-5">
         <div class="control">
-          <button type="submit" class="button is-info is-fullwidth">
+          <button
+            type="submit"
+            class="button is-info is-fullwidth {isLoading && 'is-loading'}"
+          >
             Login
           </button>
         </div>
