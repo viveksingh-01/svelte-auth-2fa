@@ -20,12 +20,16 @@
     isLoading = true;
     response = { message: '', type: null };
     try {
-      const { data } = await axios.post(
-        'http://localhost:8000/api/login',
-        payload
-      );
+      const {
+        data: { message, token },
+      } = (await axios.post('http://localhost:8000/api/login', payload, {
+        withCredentials: true,
+      })) as { data: { message: string; token: string } };
+
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
       isLoading = false;
-      response.message = data?.message;
+      response.message = message;
       response.type = 'success';
     } catch (error: any) {
       isLoading = false;
