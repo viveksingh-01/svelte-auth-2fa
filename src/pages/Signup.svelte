@@ -17,7 +17,7 @@
 
   let response: {
     message: string;
-    type: 'success' | 'error';
+    type: 'success' | 'error' | null;
   };
 
   let isLoading = false;
@@ -33,7 +33,7 @@
       isLoading = false;
       response.message = data?.message;
       response.type = 'success';
-    } catch (error) {
+    } catch (error: any) {
       isLoading = false;
       response.message = error?.response?.data.message;
       response.type = 'error';
