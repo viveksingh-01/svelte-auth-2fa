@@ -8,9 +8,11 @@
 
   async function getUserInfo() {
     try {
-      const { data } = (await axios.get('user')) as { data: IUser };
-      user = data;
-      isAuthenticated.set(true);
+      const { data } = await axios.get<IUser>('user');
+      if (!!data) {
+        user = data;
+        isAuthenticated.set(true);
+      }
     } catch (error) {
       console.log(error);
     }
