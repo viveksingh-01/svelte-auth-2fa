@@ -1,13 +1,6 @@
 <script lang="ts">
   import axios from 'axios';
-
-  interface ISignupPayload {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-  }
+  import type { IResponseMessage, ISignupPayload } from '../types';
 
   let firstName = '',
     lastName = '',
@@ -15,11 +8,7 @@
     password = '',
     confirmPassword = '';
 
-  let response: {
-    message: string;
-    type: 'success' | 'error' | null;
-  };
-
+  let response: IResponseMessage;
   let isLoading = false;
 
   async function submitData(payload: ISignupPayload) {

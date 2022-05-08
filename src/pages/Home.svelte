@@ -2,13 +2,8 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import { isAuthenticated } from '../store/auth';
+  import type { IUser } from '../types';
 
-  interface IUser {
-    id: number;
-    email: string;
-    firstName: string;
-    lastName: string;
-  }
   let user: IUser;
 
   async function getUserInfo() {

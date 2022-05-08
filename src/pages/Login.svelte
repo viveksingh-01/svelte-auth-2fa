@@ -1,20 +1,11 @@
 <script lang="ts">
   import axios from 'axios';
   import { push } from 'svelte-spa-router';
-
-  interface ILoginPayload {
-    email: string;
-    password: string;
-  }
+  import type { ILoginPayload, IResponseMessage } from '../types';
 
   let email = '',
     password = '';
-
-  let response: {
-    message: string;
-    type: 'success' | 'error' | null;
-  };
-
+  let response: IResponseMessage;
   let isLoading = false;
 
   async function submitData(payload: ILoginPayload) {
