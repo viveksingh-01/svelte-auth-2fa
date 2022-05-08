@@ -1,28 +1,23 @@
 <script lang="ts">
   import axios from 'axios';
-  import type { IResponseMessage, ISignupPayload } from '../types';
+  import { message, setMessage } from '../store/message';
+  import type { ISignupPayload } from '../types';
 
   let firstName = '',
     lastName = '',
     email = '',
     password = '',
     confirmPassword = '';
-
-  let response: IResponseMessage;
   let isLoading = false;
 
   async function submitData(payload: ISignupPayload) {
     isLoading = true;
-    response = { message: '', type: null };
     try {
-      const { data } = await axios.post('register', payload);
+      const { data } = await axios.post('signup', payload);
       isLoading = false;
-      response.message = data?.message;
-      response.type = 'success';
+      setMessage({ body: data.message, type: 'success' });
     } catch (error: any) {
       isLoading = false;
-      response.message = error?.response?.data.message;
-      response.type = 'error';
     }
   }
 
@@ -40,11 +35,11 @@
 
 <section class="form__container">
   <h2 class="mb-4 is-size-2">Sign-up</h2>
-  {#if response?.message}
+  {#if $message.body}
     <article
-      class="message {response.type === 'success' ? 'is-primary' : 'is-danger'}"
+      class="message {$message.type === 'success' ? 'is-primary' : 'is-danger'}"
     >
-      <div class="message-body">{response.message}</div>
+      <div class="message-body">{$message.body}</div>
     </article>
   {/if}
   <form on:submit|preventDefault={signup}>

@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import axios from 'axios';
+import { setMessage } from '../store/message';
 
 axios.defaults.baseURL = 'http://localhost:8000/api';
 
@@ -18,5 +20,9 @@ axios.interceptors.response.use(res => res, async error => {
     } 
     return axios(error.config);    
   }
+  setMessage({
+    body: error.response.data.message,
+    type: 'error'
+  })
   return error;
 })

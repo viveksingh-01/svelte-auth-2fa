@@ -1,36 +1,30 @@
 <script lang="ts">
   import axios from 'axios';
   import { push } from 'svelte-spa-router';
-  import type { ILoginPayload, IResponseMessage } from '../types';
+  import { message, setMessage } from '../store/message';
+  import type { ILoginPayload } from '../types';
 
   let email = '',
     password = '';
-  let response: IResponseMessage;
   let isLoading = false;
 
   async function submitData(payload: ILoginPayload) {
     isLoading = true;
-    response = { message: '', type: null };
     try {
-      const {
-        data: { message, token },
-      } = (await axios.post('login', payload, {
+      const { data } = (await axios.post('login', payload, {
         withCredentials: true,
       })) as { data: { message: string; token: string } };
 
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
 
       isLoading = false;
-      response.message = message;
-      response.type = 'success';
+      setMessage({ body: data.message, type: 'success' });
 
       setTimeout(async () => {
         await push('/');
       }, 1000);
     } catch (error: any) {
       isLoading = false;
-      response.message = error?.response?.data.message;
-      response.type = 'error';
     }
   }
 
@@ -42,11 +36,11 @@
 
 <section class="form__container">
   <h2 class="mb-4 is-size-2">Login</h2>
-  {#if response?.message}
+  {#if $message.body}
     <article
-      class="message {response.type === 'success' ? 'is-primary' : 'is-danger'}"
+      class="message {$message.type === 'success' ? 'is-primary' : 'is-danger'}"
     >
-      <div class="message-body">{response.message}</div>
+      <div class="message-body">{$message.body}</div>
     </article>
   {/if}
   <form on:submit|preventDefault={login}>
