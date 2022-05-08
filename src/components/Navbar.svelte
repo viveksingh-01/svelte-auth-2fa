@@ -1,9 +1,21 @@
 <script lang="ts">
-  import { link } from 'svelte-spa-router';
+  import axios from 'axios';
+  import { link, push } from 'svelte-spa-router';
+  import { isAuthenticated } from '../store/auth';
 
   let isActive = false;
   function toggleNavbar() {
     isActive = !isActive;
+  }
+
+  async function logout() {
+    try {
+      await axios.post('logout', {}, { withCredentials: true });
+      isAuthenticated.set(false);
+      await push('/login');
+    } catch (error) {
+      console.error(error);
+    }
   }
 </script>
 
@@ -35,10 +47,14 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a href="/signup" use:link class="button is-primary">
-              <strong>Sign up</strong>
-            </a>
-            <a href="/login" use:link class="button is-light"> Log in </a>
+            {#if $isAuthenticated}
+              <button class="button is-light" on:click={logout}>Logout</button>
+            {:else}
+              <a href="/signup" use:link class="button is-primary">
+                <strong>Sign up</strong>
+              </a>
+              <a href="/login" use:link class="button is-light"> Log in </a>
+            {/if}
           </div>
         </div>
       </div>
