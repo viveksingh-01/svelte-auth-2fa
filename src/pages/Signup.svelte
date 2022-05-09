@@ -52,6 +52,7 @@
               type="text"
               placeholder="Enter your first name"
               class="input"
+              minlength="2"
               bind:value={firstName}
             />
           </div>
@@ -75,6 +76,7 @@
             type="email"
             placeholder="Enter your email address"
             class="input"
+            minlength="3"
             bind:value={email}
           />
         </div>
@@ -86,6 +88,7 @@
             type="password"
             placeholder="Enter password"
             class="input"
+            minlength="6"
             bind:value={password}
           />
         </div>
@@ -97,6 +100,7 @@
             type="password"
             placeholder="Re-enter password"
             class="input"
+            minlength="6"
             bind:value={confirmPassword}
           />
         </div>
