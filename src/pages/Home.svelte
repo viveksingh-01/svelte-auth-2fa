@@ -26,8 +26,8 @@
 <section>
   <div class="has-text-centered my-5">
     {#if user?.firstName}
-      <h2 class="is-size-2">Hi {user.firstName}!</h2>
+      <h2 class="is-size-2 mb-4 has-text-primary">Hi {user.firstName}!</h2>
     {/if}
-    <h3 class="is-size-3">Welcome to Svelte 2FA Auth!</h3>
+    <h3 class="is-size-4">Welcome to Svelte 2FA!</h3>
   </div>
 </section>

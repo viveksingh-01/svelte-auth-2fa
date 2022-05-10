@@ -23,7 +23,7 @@
   <div class="container">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
-        <h1 class="is-size-5 has-text-weight-light">SVELTE 2FA AUTH</h1>
+        <h1 class="is-size-5 has-text-weight-light">SVELTE 2FA</h1>
       </a>
 
       <!-- svelte-ignore a11y-missing-attribute -->
