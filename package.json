@@ -16,6 +16,7 @@
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@rollup/plugin-typescript": "^8.0.0",
     "@tsconfig/svelte": "^2.0.1",
+    "@types/qrcode": "^1.4.2",
     "@typescript-eslint/eslint-plugin": "^5.22.0",
     "@typescript-eslint/parser": "^5.22.0",
     "eslint": "^8.15.0",
@@ -35,6 +36,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "qrcode": "^1.5.0",
     "sirv-cli": "^2.0.0",
     "svelte-spa-router": "^3.2.0"
   }
